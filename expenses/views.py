@@ -35,6 +35,11 @@ class ExpenseListCreateView(generics.ListCreateAPIView):
     def get_queryset(self):
         return Expense.objects.filter(user=self.request.user)
 
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context["request"] = self.request
+        return context
+
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
@@ -46,3 +51,8 @@ class ExpenseDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return Expense.objects.filter(user=self.request.user)
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context["request"] = self.request
+        return context
