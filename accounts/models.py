@@ -4,8 +4,7 @@ from django.db import models
 
 class User(AbstractUser):
     email = models.EmailField(unique=True)
-    phone = models.CharField(max_length=20, unique=True)
-
+    phone = models.CharField(max_length=20, unique=True, blank=True, null=True)
     recovery_question = models.CharField(max_length=255)
     recovery_answer = models.CharField(max_length=255)
 
